@@ -2648,14 +2648,18 @@ document.addEventListener('keydown',function(e){
 // Click inside an overlay gallery to open lightbox
 (function(){
   document.addEventListener('click',function(e){
-    var item=e.target.closest('.gallery-page .sg-item');
+    var item=e.target.closest('.gallery-page .sg-item, .gallery-page .mockup-item');
     if(!item)return;
     var img=item.querySelector('img');
     if(!img||!img.src||img.src.includes('IMG_'))return;
     var page=item.closest('.gallery-page');
     lbImgs=[];
-    page.querySelectorAll('.sg-item img').forEach(function(im){
-      if(im.src&&!im.src.includes('IMG_'))lbImgs.push({src:im.src,wm:'© EDG Studios'});
+    page.querySelectorAll('.sg-item img, .mockup-item img').forEach(function(im){
+      if(im.src&&!im.src.includes('IMG_')){
+        var host=im.closest('.sg-item,.mockup-item');
+        var lbl=host&&host.querySelector('.sg-overlay span')?host.querySelector('.sg-overlay span').textContent.trim():'© EDG Studios';
+        lbImgs.push({src:im.src,wm:lbl});
+      }
     });
     lbIdx=lbImgs.findIndex(function(i){return i.src===img.src;});
     if(lbIdx<0)lbIdx=0;

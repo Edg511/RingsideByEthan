@@ -2044,6 +2044,17 @@ body.view-book .chapter[data-view="book"],body.view-book #about,body.view-book #
   </div>
 </div>
 
+<!-- LIGHTBOX -->
+<div id="lb">
+  <button id="lb-close" onclick="event.stopPropagation();closeLB()" aria-label="Close">✕</button>
+  <img id="lb-img" src="" alt="" onclick="event.stopPropagation()"/>
+  <div id="lb-nav">
+    <button class="lb-arr" onclick="event.stopPropagation();lbPrev()" aria-label="Previous">‹</button>
+    <button class="lb-arr" onclick="event.stopPropagation();lbNext()" aria-label="Next">›</button>
+  </div>
+  <div id="lb-wm"></div>
+</div>
+
 <script>
 // ── CURSOR ───────────────────────────────────────────────────────────
 (function(){
